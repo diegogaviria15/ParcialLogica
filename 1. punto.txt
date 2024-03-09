@@ -1,0 +1,89 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ParcialLogica1
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            //Declaración de variables
+            double salario = 0, venta1 = 0, venta2 = 0, venta3 = 0, comision = 0, PromedioComisiones = 0, gananciaTotal = 0, ventastotales = 0, ventamayor = 0, bonificacion = 0;
+            string msjBonificacion = "";
+
+            Console.WriteLine("#######################################");
+            Console.WriteLine("############### Buen día ##############");
+            Console.WriteLine("#######################################");
+            Console.WriteLine("\nPor favor ingrese el salario del trabajador a evaluar: ");
+            salario = double.Parse(Console.ReadLine());
+            Console.WriteLine("\nIngrese valor de la Venta # 1:");
+            venta1 = double.Parse(Console.ReadLine());
+            Console.WriteLine("\nIngrese valor de la Venta # 2:");
+            venta2 = double.Parse(Console.ReadLine());
+            Console.WriteLine("\nIngrese valor de la Venta # 3:");
+            venta3 = double.Parse(Console.ReadLine());
+
+            //Ventas totales -- Se toma la sumatoria de las ventas realizadas
+            ventastotales = venta1 + venta2 + venta3;
+
+            //Bonificación -- Se verifica si la sumatoria de las ventas es mayor a $1.000.000 (Adicional se configura el mensaje de bonificación)
+            if (ventastotales > 1000000)
+            {
+                bonificacion = 100000;
+                msjBonificacion = "Felicitaciones, cumpliste con la meta y obtendrás una bonificación de $100.000";
+            }
+            else
+            {
+                bonificacion = 0;
+                msjBonificacion = "Lastimosamente no cumpliste con la meta y no recibiras el bono, sigue trabajando duro para conseguirlo";
+            }
+
+            // Mostrar mensaje de bonificación
+            Console.WriteLine(msjBonificacion);
+
+            //Comisiones -- Se saca el total de las comisiones por ventas totales
+            comision = ventastotales * 0.1;
+
+            //Ganancia Total -- Se obtiene la ganancia total del vendedor, esto sumando el salario base, las comisiones y la bonificación
+            gananciaTotal = salario + comision + bonificacion;
+
+            //Venta Mayor -- Se comparan las ventas para obtener la venta mayor
+            if ((venta1 >= venta2) && (venta2 >= venta3))
+            {
+                ventamayor = venta1;
+            }
+            else if ((venta2 >= venta3) && (venta3 >= venta1))
+            {
+                ventamayor = venta2;
+            }
+            else 
+            {
+                ventamayor = venta3;
+            }
+
+            //Promedio de comisiones -- Se obtiene el promedio de comisiones
+            PromedioComisiones = comision / 3;
+
+
+            Console.WriteLine("\n\n########    Calculando    #######");
+            Console.WriteLine("\nEl empleado obtuvo un total de $ {0}, teninendo un promedio de ${1}, su venta mayor fue de $ {2}", comision, PromedioComisiones,ventamayor);
+            if (bonificacion==0)
+            {
+                Console.WriteLine("\nEl empleado obtendrá un total de $ {0}, esto debido a su salario de ${1} y sus comisiones de ${2}",gananciaTotal,salario,comision);
+            }
+            else
+            {
+                Console.WriteLine("\nEl empleado obtendrá un total de $ {0}, esto debido a su salario de ${1}, sus comisiones de ${2} y su bonificacion de {3}", gananciaTotal, salario, comision,bonificacion);
+
+            }
+
+            Console.WriteLine("Presione cualquier tecla para finalizar");
+            Console.ReadKey();
+
+
+        }
+    }
+}
